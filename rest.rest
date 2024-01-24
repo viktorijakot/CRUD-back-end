@@ -1,2 +1,5 @@
 ### main  page
 GET http://localhost:3000/
+
+### test
+GET http://localhost:3000/test
