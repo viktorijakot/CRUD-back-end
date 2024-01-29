@@ -1,3 +1,4 @@
+const APIError = require('../apiErrors/apiErrors');
 const { executeQuery } = require('../helpers');
 
 module.exports = {
@@ -42,12 +43,12 @@ module.exports = {
 
     if (resObj.affectedRows !== 1) {
       console.log('create item no rows affected', resObj);
-      return res.status(400).json('something went wrong');
+      return next(new APIError('something went wrong', 400));
     }
 
     return res.status(201).json({
       id: resObj.insertId,
-      msg: 'success',
+      msg: 'Success',
     });
   },
   update: async (req, res, next) => {
@@ -60,12 +61,20 @@ module.exports = {
       console.log(' delete item error ===', error);
       return next(error);
     }
-    if (resObj.affectedRows === 1) {
-      return res.json({ msg: `student with id ${studentId} was updated` });
+    // if (resObj.affectedRows === 1) {
+    //   return res.json({ msg: `student with id ${studentId} was updated` });
+    // }
+    // return res.status(201).json({
+    //   id: resObj.insertId,
+    //   msg: 'success',
+    // });
+    if (resObj.affectedRows !== 1) {
+      return next(new APIError('something went wrong', 400));
     }
-    return res.status(201).json({
-      id: resObj.insertId,
-      msg: 'success',
+
+    res.status(201).json({
+      id: studentId,
+      msg: `Student with id:${studentId} updated successfully`,
     });
   },
   delete: async (req, res, next) => {
@@ -77,12 +86,19 @@ module.exports = {
       console.log(' delete item error ===', error);
       return next(error);
     }
-    if (rows.affectedRows === 1) {
-      return res.json({ msg: `post with id ${studentId} was deleted` });
+    // if (rows.affectedRows === 1) {
+    //   return res.json({ msg: `post with id ${studentId} was deleted` });
+    // }
+    // return res.status(400).json({
+    //   msg: 'no rows afected',
+    //   rows,
+    // });
+    if (rows.affectedRows !== 1) {
+      return next(new APIError('something went wrong', 400));
     }
-    return res.status(400).json({
-      msg: 'no rows afected',
-      rows,
+
+    res.status(200).json({
+      msg: 'Student deleted successfully',
     });
   },
 

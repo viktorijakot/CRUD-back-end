@@ -15,9 +15,9 @@ POST http://localhost:3000/api/students
 Content-Type: application/json
 
 {
-    "firstName": "Vika",
-    "lastName": "Kot",
-    "email": "vika@vika"
+    "firstName": "James",
+    "lastName": "Bond",
+    "email": "james@bond"
 }
 
 ### PUT update student
@@ -25,10 +25,10 @@ PUT http://localhost:3000/api/students/1
 Content-Type: application/json
 
 {
-    "firstName": "James",
-    "lastName": "Bond",
-    "email": "james@bond"
+    "firstName": "Vika",
+    "lastName": "Vika",
+    "email": "vika@vika"
 }
 
 ### DELETE delete student
-DELETE  http://localhost:3000/api/students/3
+DELETE  http://localhost:3000/api/students/4

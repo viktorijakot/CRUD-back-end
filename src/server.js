@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 // const { executeQuery } = require('./helpers');
 const studentRouter = require('./routes/studentRoutes');
+const { mainErrorHandler } = require('./middleware');
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.use('/api', studentRouter);
 //   const [students, error] = await executeQuery(sql);
 //   return res.json(students);
 // });
+
+app.use(mainErrorHandler);
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
