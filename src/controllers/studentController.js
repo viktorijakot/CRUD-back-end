@@ -30,11 +30,11 @@ module.exports = {
     return res.json(itemArr[0]);
   },
   create: async (req, res, next) => {
-    const { firstName, lastName, email } = req.body;
+    const { firstname, lastname, email } = req.body;
     const sql = `INSERT INTO student (firstname, lastname, email) 
  VALUES (?,?,?)`;
 
-    const [resObj, error] = await executeQuery(sql, [firstName, lastName, email]);
+    const [resObj, error] = await executeQuery(sql, [firstname, lastname, email]);
 
     if (error) {
       console.log(' create item error ===', error);
@@ -53,10 +53,10 @@ module.exports = {
   },
   update: async (req, res, next) => {
     const { studentId } = req.params;
-    const { firstName, lastName, email } = req.body;
+    const { firstname, lastname, email } = req.body;
     const sql = 'UPDATE student SET firstname=?, lastname=?, email=? WHERE id=?';
 
-    const [resObj, error] = await executeQuery(sql, [firstName, lastName, email, studentId]);
+    const [resObj, error] = await executeQuery(sql, [firstname, lastname, email, studentId]);
     if (error) {
       console.log(' delete item error ===', error);
       return next(error);

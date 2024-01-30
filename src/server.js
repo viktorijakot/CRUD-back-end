@@ -5,6 +5,7 @@ const cors = require('cors');
 // const { executeQuery } = require('./helpers');
 const studentRouter = require('./routes/studentRoutes');
 const { mainErrorHandler } = require('./middleware');
+const authRouter = require('./routes/authRoutes');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', studentRouter);
+app.use('/api', authRouter);
 
 // app.get('/test', async (req, res) => {
 //   const sql = 'SELECT * FROM `student`';
