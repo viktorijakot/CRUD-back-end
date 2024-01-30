@@ -6,6 +6,9 @@ const dbConfig = {
   port: process.env.DB_PORT,
 };
 
+const jwtSecret = process.env.JWT_SECRET;
+
 module.exports = {
   dbConfig,
+  jwtSecret,
 };
