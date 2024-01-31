@@ -27,7 +27,8 @@ const validateJwtToken = async (req, resp, next) => {
     jwt.verify(token, jwtSecret);
     next();
   } catch (error) {
-    console.log('error ===', error);
+    console.log('error token validation===');
+    return next(new APIError('Invalid token', 401));
   }
 };
 
