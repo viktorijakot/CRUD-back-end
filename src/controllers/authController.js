@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { executeQuery } = require('../helpers');
+const { executeQuery, signJwtToken, parseJwtToken } = require('../helpers');
 const APIError = require('../apiErrors/apiErrors');
 const { jwtSecret } = require('../config');
 
@@ -48,13 +48,17 @@ const login = async (req, resp, next) => {
   if (!bcrypt.compareSync(password, hashPassword)) {
     return next(new APIError('Password or email not match', 401));
   }
-  const token = jwt.sign({
-    email: userFound.email,
-    id: userFound.id,
-    scope: userFound.scope,
-  }, jwtSecret, {
-    expiresIn: '1h',
-  });
+  const data = {
+    sub: userFound.id,
+    user: {
+      email: userFound.email,
+      id: userFound.id,
+      scope: userFound.scope,
+    },
+  };
+
+  const token = signJwtToken(data);
+
   resp.json({
     msg: 'Login success',
     token,

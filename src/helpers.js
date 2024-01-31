@@ -1,5 +1,7 @@
 const mysql = require("mysql2/promise");
-const { dbConfig } = require("./config");
+const { dbConfig, jwtSecret } = require("./config");
+const jwt = require('jsonwebtoken');
+const { json } = require("express");
 
 async function executeQuery(sql, arguments = []) {
   let connection;
@@ -19,6 +21,19 @@ async function executeQuery(sql, arguments = []) {
     }
   }
 }
+
+function signJwtToken (data, expires = '1h') {
+if(!jwtSecret)throw new Error ('JWR Secret not provided')
+
+return jwt.sign(data, jwtSecret, {expiresIn: expires})
+}
+
+function parseJwtToken(token){
+return JSON.parse(Buffer.from(token.split('.')[1], 'base64'))
+}
+
 module.exports = {
   executeQuery,
+  signJwtToken,
+  parseJwtToken
 };
