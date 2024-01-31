@@ -13,10 +13,11 @@ GET http://localhost:3000/api/students/3
 ### POST create student
 POST http://localhost:3000/api/students
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXIiOnsiZW1haWwiOiJqYW1lc0Bib25kIiwiaWQiOjEsInNjb3BlIjoibWFuYWdlciJ9LCJpYXQiOjE3MDY2OTQ4MTEsImV4cCI6MTcwNjY5ODQxMX0.q9507ewjTeDbT_6he12YbK7EOlAOSLTvV9KhVORPfk4
 
 {
-    "firstName": "James",
-    "lastName": "Bond",
+    "firstname": "James",
+    "lastname": "Bond",
     "email": "james@bond"
 }
 
