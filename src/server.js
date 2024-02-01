@@ -4,8 +4,9 @@ const morgan = require('morgan');
 const cors = require('cors');
 // const { executeQuery } = require('./helpers');
 const studentRouter = require('./routes/studentRoutes');
-const { mainErrorHandler } = require('./middleware');
+const { mainErrorHandler, validateJwtToken } = require('./middleware');
 const authRouter = require('./routes/authRoutes');
+const userRouter = require('./routes/userRotes');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', studentRouter);
 app.use('/api', authRouter);
+app.use('/api', validateJwtToken, userRouter);
 
 // app.get('/test', async (req, res) => {
 //   const sql = 'SELECT * FROM `student`';
