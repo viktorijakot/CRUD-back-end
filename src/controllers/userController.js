@@ -8,7 +8,7 @@ module.exports = {
   all: async (req, res, next) => {
     console.log('HERE');
     // Apsirasome SQL uzklausa
-    const sql = 'SELECT * FROM user';
+    const sql = 'SELECT id, email, scope, verified FROM user';
 
     // Ivykdome parasyta uzklausa
     const [items, error] = await executeQuery(sql);
@@ -39,11 +39,14 @@ module.exports = {
       email, password, scope, verified,
     } = req.body;
 
+    console.log('password ===', password);
+    console.log('req.body ===', req.body);
+
     const sql = 'INSERT INTO user (email, password, scope, verified) VALUES (?, ?, ?, ?)';
 
-    const passwordHash = bcrypt.hashSync(password, +salt);
+    const passwordHash = bcrypt.hashSync(password, 10);
 
-    const [responseObject, error] = await executeQuery(sql, [email, passwordHash, scope, verified]);
+    const [responseObject, error] = await executeQuery(sql, [email, passwordHash, scope, +verified]);
 
     if (error) {
       return next(error);
@@ -67,7 +70,7 @@ module.exports = {
 
     const sql = 'UPDATE user SET email=?, password=?, scope=?, verified=? WHERE id=?';
 
-    const passwordHash = bcrypt.hashSync(password, +salt);
+    const passwordHash = bcrypt.hashSync(password, 10);
 
     const [responseObject, error] = await executeQuery(sql, [email, passwordHash, scope, verified, id]);
 

@@ -54,6 +54,18 @@ Content-Type: application/json
 
 ### GET all users
 GET http://localhost:3000/api/user
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXIiOnsiZW1haWwiOiJqYW1lc0Bib25kIiwiaWQiOjEsInNjb3BlIjoibWFuYWdlciJ9LCJpYXQiOjE3MDcxMTc5MDUsImV4cCI6MTcwNzEyMTUwNX0.Sd6jgd8WncGivOJfKUPjUrTr_FzuPyqZsDJMFTDmRyk
 ### GET single user
-GET http://localhost:3000/api/user/:id
+GET http://localhost:3000/api/user/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXIiOnsiZW1haWwiOiJqYW1lc0Bib25kIiwiaWQiOjEsInNjb3BlIjoibWFuYWdlciJ9LCJpYXQiOjE3MDcxMTc5MDUsImV4cCI6MTcwNzEyMTUwNX0.Sd6jgd8WncGivOJfKUPjUrTr_FzuPyqZsDJMFTDmRyk
+
+### POST CREATE user
+POST http://localhost:3000/api/user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXIiOnsiZW1haWwiOiJqYW1lc0Bib25kIiwiaWQiOjEsInNjb3BlIjoibWFuYWdlciJ9LCJpYXQiOjE3MDcxMTc5MDUsImV4cCI6MTcwNzEyMTUwNX0.Sd6jgd8WncGivOJfKUPjUrTr_FzuPyqZsDJMFTDmRyk
+
+{
+    "email": "name@bond",
+    "password": "123456",
+    "scope": "manager",
+    "verified": 1
+}
